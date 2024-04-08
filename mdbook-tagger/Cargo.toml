@@ -1,0 +1,20 @@
+[package]
+name = "mdbook-tagger"
+version = "0.1.0"
+edition = "2021"
+authors = ["Acheul <seoul605.21@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/acheul/mdbook-collectors"
+description = "A mdbook preprocessor to collect and build tag data in Json format"
+readme = "readme.md"
+keywords = ["mdbook"]
+
+[dependencies]
+clap = { version = "4.5.4", features = ["derive", "cargo"] }
+mdbook = "0.4.37"
+regex = "1.10.4"
+semver = "1.0.22"
+serde_json = "1.0.115"
+toml = "0.5.11"
+log = "0.4.21"
+hashbrown = { version = "0.14.3", features = ["serde"] }

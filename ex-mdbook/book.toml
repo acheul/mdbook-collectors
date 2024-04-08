@@ -1,0 +1,32 @@
+[book]
+authors = ["Acheul"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Ex-mdbook"
+
+[build]
+build-dir = "book"
+
+[output.html]
+theme = "theme"
+no-section-label = true
+git-repository-rul = "https://github.com/acheul/mdbook-collector"
+additional-js = ["adds/tags.js"]
+additional-css = ["adds/tags.css"]
+
+[preprocessor.collector]
+input_type = "json" # "yaml" "toml"
+# marker = "collect"
+# save_path = "collect.json"
+# path_key = "path"
+
+[preprocessor.tagger]
+# marker = "tags"
+# tag2posts_path = "tag2posts.json"
+# post2tags_path = "post2tags.json"
+# split = ";" # ","
+
+[preprocessor.tocjs]
+block_marker_id = "tock"
+wing_marker_id = "tocw"

@@ -1,0 +1,7 @@
+[workspace]
+resolver="2"
+members = [
+  "mdbook-collector",
+  "mdbook-tagger",
+  "mdbook-tocjs"
+]

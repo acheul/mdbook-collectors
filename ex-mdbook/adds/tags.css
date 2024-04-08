@@ -1,0 +1,24 @@
+.cell-tag {
+  margin: 0 0 16px;
+}
+
+.tag-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.tag-name::before {
+  content: '🏷️'
+}
+
+.tag-post {
+  font-size: 1.4rem;
+  color: var(--fg) !important;
+  text-decoration: underline !important;
+  padding: 16px 0;
+  margin-left: 16px;
+}
+
+.tag-post:hover {
+  font-weight: bold;
+}
