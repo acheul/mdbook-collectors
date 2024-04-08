@@ -8,6 +8,7 @@ repository = "https://github.com/acheul/mdbook-collectors"
 description = "A mdbook preprocessor which adds extra js and css file for ToC hydration."
 readme = "readme.md"
 keywords = ["mdbook"]
+exclude = ["assets", "tocjs"]
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive", "cargo"] }
