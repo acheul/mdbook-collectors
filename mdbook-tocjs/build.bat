@@ -1,4 +1,4 @@
 @echo off
-python tocjs/build/condense_and_copy.py
+python ../_build/condense_and_copy.py --src_path="./tocjs" --build_path="./src/blobs.rs"
 cargo build --release
-cargo install --path=.
+REM cargo install --path=.

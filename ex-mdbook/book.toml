@@ -28,5 +28,5 @@ input_type = "json" # "yaml" "toml"
 # split = ";" # ","
 
 [preprocessor.tocjs]
-block_marker_id = "tock"
-wing_marker_id = "tocw"
+# block_marker_id = "tock"
+# wing_marker_id = "tocw"

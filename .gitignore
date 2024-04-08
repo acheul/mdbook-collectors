@@ -1,2 +1,5 @@
 /target
 Cargo.lock
+_build
+plan.md
+mdbook-extjs
