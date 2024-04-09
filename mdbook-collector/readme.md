@@ -8,7 +8,7 @@ A [mdbook preprocessor](https://rust-lang.github.io/mdBook/format/configuration/
 cargo install mdbook-collector
 ```
 
-## Use
+## Use (v0.2.0)
 In a markdown file of a post, include:
 ```html
 <!-- collect
@@ -20,19 +20,24 @@ In a markdown file of a post, include:
 }
 -->
 ```
-Then the preprocessor will parse each post and build a consolidated json file, which is a map whose key is each post's name and whose values are (1)post's path and (2)sub-map of parsed data:
+Then the preprocessor will parse each post and build a consolidated json file, which is a map whose key is each post's **url path** and whose values are **sub-map** of parsed data. The title of each post will also be added to the sub-map, with a key name "title".
 ```json
 {
-  "post's name": {
-    "path": "posts/path.md",
+  "post/ex/url": {
+    "title": "Title of this post",
     "data" {
       "type": "json",
       "keywords": ["json", "collect"]
     }
-  }
+  },
+  ...
 }
 ```
-This json file can be used in your additional .js files, for example.
+
+* Mind that in the v.0.1.0, the key of this map was post's name(title). From v.0.2.0, each post's url path is the key. And the title will be added to each sub map.
+
+
+This newly created json file can be used for various purposes: ex. in your additional .js files.
 
 Make sure that each post's raw json data should be able to be parsed into "map" structure. For example, below will not be parsed and thus be ignored:
 ```html
@@ -44,7 +49,7 @@ Make sure that each post's raw json data should be able to be parsed into "map" 
 -->
 ```
 
-If Json's strictness and no-comment-ness bothers you, use yaml or toml option.
+If Json's strictness and no-comment-ness bothers you, use yaml or toml option!
 
 ## Configuration
 Configuration example in `book.toml`. Below is default setting:
@@ -53,7 +58,7 @@ Configuration example in `book.toml`. Below is default setting:
 input_type = "json"
 marker = "collect"
 save_path = "collect.json"
-path_key = "path"
+add_title = true
 ```
 
 ### input_type
@@ -83,9 +88,7 @@ It must be saved under the `src` directory to be auto copied into build-dir.
 > 🪧 Mind that the `mdbook serve` watches `src` directory. Once you start `mdbook serve` command then change any contents under `src` directory, the collector will rebuild the json file and this leads to a repeat loop of watch and serve. To prevent this, make a **.gitignore** file at the book's root directory and add the to-be-built json file's name.
 
 
-### path_key
-The collector makes a json map whose key is each post's name and whose value is a sub map parsed from each post's source file.
+### add_title
+The collector makes a json map whose key is each post's url path and whose value is a sub map parsed from each post's source file.
 
-The collector insert one more information to the sub map: each post's path. Hereby the inserted value is the actual path and its key is designated from the `path_key` configuration. Default is `path`.
-
-Collected paths can be used to make href link in an additional js file, for example.
+The collector insert one more information to the sub map: each post's title as a value and "title" as a key. If you don't want to add title info, set `add_title` false.

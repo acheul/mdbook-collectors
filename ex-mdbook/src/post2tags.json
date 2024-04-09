@@ -1,1 +1,1 @@
-{"Tags-Split-Comma":["tagger, comma"],"Collect-Toml":["toml","collect"],"Collect-Json":["json","collect"],"Collect-Yaml":["yaml","collect"]}
+{"posts/json.md":["json","collect"],"posts/yaml.md":["yaml","collect"],"posts/toml.md":["toml","collect"],"posts/comma.md":["tagger, comma"]}

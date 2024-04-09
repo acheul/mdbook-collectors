@@ -19,7 +19,7 @@ additional-css = ["adds/tags.css"]
 input_type = "json" # "yaml" "toml"
 # marker = "collect"
 # save_path = "collect.json"
-# path_key = "path"
+# add_title = true
 
 [preprocessor.tagger]
 # marker = "tags"
@@ -28,5 +28,7 @@ input_type = "json" # "yaml" "toml"
 # split = ";" # ","
 
 [preprocessor.tocjs]
+# save_dir = "lib"
+# theme_dir = "theme"
 # block_marker_id = "tock"
 # wing_marker_id = "tocw"

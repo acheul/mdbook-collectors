@@ -17,8 +17,6 @@ pub struct Config {
   tag2posts_path: PathBuf,
   /// save path of post2tags data file
   post2tags_path: PathBuf,
-  /// Regular expression built from the marker.
-  re: Regex,
   /// Split pattern to slice tags literal
   split: String
 }
@@ -34,13 +32,11 @@ impl Config {
     let marker = String::from(DEFAULT_MARKER);
     let tag2posts_path = ctx.config.book.src.join(DEFAULT_TAG2POSTS_PATH);
     let post2tags_path = ctx.config.book.src.join(DEFAULT_POST2TAGS_PATH);
-    let re: Regex = Self::regex(&marker)?;
 
     let mut config = Self {
       marker, 
       tag2posts_path,
       post2tags_path,
-      re,
       split: String::from(DEFAULT_SPLIT)
     };
 
@@ -63,7 +59,6 @@ impl Config {
 
     if let Some(x) = get_value_to_str(cfg, "marker") {
       config.marker = x?;
-      config.re = Self::regex(config.marker.as_str())?;
     }
 
     if let Some(x) = get_value_to_str(cfg, "tag2posts_path") {
@@ -78,10 +73,14 @@ impl Config {
       config.split = x?;
     }
 
+    // check out the regex syntax in advance.
+    let _ = config.regex()?;
+
     Ok(config)
   }
 
-  fn regex(marker: &str) -> Result<Regex> {
+  fn regex(&self) -> Result<Regex> {
+    let marker = &self.marker;
     let re = format!("<!-- ?{}:?((?s).*?)-->", marker);
     if let Ok(re) = Regex::new(re.as_str()) {
       Ok(re)
@@ -113,7 +112,7 @@ impl Config {
 
     let (mut start, mut end) = (None, None);
 
-    if let Some(cap) = self.re.captures(content.as_str()) {
+    if let Some(cap) = self.regex().unwrap().captures(content.as_str()) {
       if let Some(match1) = cap.get(1) {
         
         let match0 = cap.get(0).unwrap();
@@ -121,7 +120,7 @@ impl Config {
         end.replace(match0.end());
 
         let tags = parse_to_tags(match1.as_str());
-        post2tags.insert(name.to_string(), tags.clone());
+        post2tags.insert(path.clone(), tags.clone());
 
         for tag in tags.into_iter() {
           let post_ = (name.to_string(), path.clone());

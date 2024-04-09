@@ -40,14 +40,11 @@ pub struct Config {
   marker: String,
   /// save path of collected data
   save_path: PathBuf,
-  /// Key name for the post's path in the json file to be saved. 
-  path_key: String,
-  /// Regular expression built from the marker.
-  re: Regex
+  /// Add post's title to the sub map or not
+  add_title: bool
 }
 
 static DEFAULT_MARKER: &str = "collect";
-static DEFAULT_PATH_KEY: &str = "path";
 static DEFAULT_SAVE_PATH: &str = "collect.json";
 
 
@@ -57,15 +54,12 @@ impl Config {
     let input_type = DataType::Json;
     let marker = String::from(DEFAULT_MARKER);
     let save_path = ctx.config.book.src.join(DEFAULT_SAVE_PATH);
-    let path_key = String::from(DEFAULT_PATH_KEY);
-    let re = Self::regex(&marker)?;
 
     let mut config = Self {
       input_type,
       marker, 
       save_path,
-      path_key,
-      re
+      add_title: true
     };
 
     let Some(cfg) = ctx.config.get_preprocessor(preprocessor_name) else {
@@ -91,21 +85,28 @@ impl Config {
 
     if let Some(x) = get_value_to_str(cfg, "marker") {
       config.marker = x?;
-      config.re = Self::regex(config.marker.as_str())?;
     }
 
     if let Some(x) = get_value_to_str(cfg, "save_path") {
       config.save_path = ctx.config.book.src.join(x?.as_str());
     }
 
-    if let Some(x) = get_value_to_str(cfg, "path_key") {
-      config.path_key = x?;
+    if let Some(x) = cfg.get("add_title") {
+      if let Some(x) = x.as_bool() {
+        config.add_title = x;
+      } else {
+        return Err(Error::msg(format!("add_title {x:?} is not a valid boolean type")));
+      }
     }
+
+    // check out the regex syntax in advance.
+    let _ = config.regex()?;
 
     Ok(config)
   }
 
-  fn regex(marker: &str) -> Result<Regex> {
+  fn regex(&self) -> Result<Regex> {
+    let marker = &self.marker;
     let re = format!("<!-- ?{}((?s).*?)-->", marker);
     if let Ok(re) = Regex::new(re.as_str()) {
       Ok(re)
@@ -140,8 +141,7 @@ impl Config {
       }
     };
 
-
-    if let Some(cap) = self.re.captures(content.as_str()) {
+    if let Some(cap) = self.regex().unwrap().captures(content.as_str()) {
       if let Some(match1) = cap.get(1) {
         
         let match0 = cap.get(0).unwrap();
@@ -191,8 +191,10 @@ impl Preprocessor for Collector {
           let name = chapter.name.to_string();
         
           if let Some(mut sub_map) = cfg.collect_and_drain(&mut chapter.content, &name) {
-            sub_map.insert(cfg.path_key.clone(), JsValue::String(String::from(path)));
-            map.insert(name, JsValue::Object(sub_map));
+            if cfg.add_title {
+              sub_map.insert("title".to_string(), JsValue::String(name.clone()));
+            }
+            map.insert(path.to_string(), JsValue::Object(sub_map));
           }
         }
       }

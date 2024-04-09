@@ -7,7 +7,7 @@ A [mdbook preprocessor](https://rust-lang.github.io/mdBook/format/configuration/
 cargo install mdbook-tagger
 ```
 
-## Use
+## Use (v0.2.0)
 In a .md file of a post, include:
 ```html
 <!-- tags: computer; book -->
@@ -20,6 +20,7 @@ The preprocessor parses each post's tag data and then builds two consolidated js
 {
   "tag's name": [
     ["post's name", "post's path"],
+    ["other-post's name", "other-post's path"],
     ...
   ],
   ...
@@ -29,10 +30,13 @@ The preprocessor parses each post's tag data and then builds two consolidated js
 ### (2) Post to Tags
 ```json
 {
-  "post's name": ["tag's name", ...],
+  "post's url": ["tag's name", "other tag's name", ...],
   ...
 }
 ```
+
+* Mind that in the v.0.1.0, the key of this map was post's name(title). From v.0.2.0, each post's url path is the key of map.
+
 
 ## Configuration
 Default setting (in `book.toml`):
