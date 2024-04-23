@@ -4,11 +4,12 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Page not found - Ex-mdbook</title>
-        <base href="/">
+        <base href="/mdbook-collectors/">
 
 
         <!-- Custom HTML head -->
-        <link rel="stylesheet" href="/mdbook-collectors/lib/toc.css"><script src="/mdbook-collectors/lib/toc.js"></script>
+        <link rel="stylesheet" href="/mdbook-collectors/lib/toc.css">
+        <script src="/mdbook-collectors/lib/toc.js"></script>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -194,22 +195,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
