@@ -16,6 +16,9 @@ additional-js = ["adds/tags.js"]
 additional-css = ["adds/tags.css"]
 site-url = "/mdbook-collectors/"
 
+[output.html.print]
+enable = false
+
 [preprocessor.collector]
 input_type = "json" # "yaml" "toml"
 # marker = "collect"
