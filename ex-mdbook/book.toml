@@ -11,7 +11,7 @@ build-dir = "../docs"
 [output.html]
 theme = "theme"
 no-section-label = true
-git-repository-rul = "https://github.com/acheul/mdbook-collector"
+git-repository-url = "https://github.com/acheul/mdbook-collector"
 additional-js = ["adds/tags.js"]
 additional-css = ["adds/tags.css"]
 site-url = "/mdbook-collectors/"

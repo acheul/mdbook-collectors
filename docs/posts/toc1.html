@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        <link rel="stylesheet" href="/lib/toc.css"><script src="/lib/toc.js"></script>
+        <link rel="stylesheet" href="lib/toc.css"><script src="lib/toc.js"></script><link rel="stylesheet" href="lib/toc.css"><script src="lib/toc.js"></script><link rel="stylesheet" href="/lib/toc.css"><script src="/lib/toc.js"></script>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -148,6 +148,9 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        <a href="https://github.com/acheul/mdbook-collector" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
 
                     </div>
                 </div>
@@ -231,6 +234,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
