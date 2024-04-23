@@ -1,6 +1,6 @@
-# collect.json
-# tag2posts.json
-# post2tags.json
-# /src/lib
+/src/collect.json
+/src/tag2posts.json
+/src/post2tags.json
+/src/lib
 
 book
