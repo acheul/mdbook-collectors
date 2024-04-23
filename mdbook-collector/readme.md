@@ -1,5 +1,7 @@
 # mdbook-collector
 
+[![Crates.io](https://img.shields.io/crates/v/mdbook-collector)](https://crates.io/crates/mdbook-collector)
+
 A [mdbook preprocessor](https://rust-lang.github.io/mdBook/format/configuration/preprocessors.html) which collects json/yaml/toml data from each post and builds a json file of it
 
 

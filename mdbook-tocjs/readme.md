@@ -1,8 +1,13 @@
 # mdbook-tocjs
 
+[![Crates.io](https://img.shields.io/crates/v/mdbook-tocjs)](https://crates.io/crates/mdbook-tocjs)
+
 A [mdbook preprocessor](https://rust-lang.github.io/mdBook/format/configuration/preprocessors.html) which adds extra js and css file for ToC hydration.
 
 This preprocessor does not actually preprocess contents of each chapters. Rather, it adds additional `toc.js` & `toc.css` file to be used to hydrate **ToC**(Table of Contents) block and wing.
+
+* [**Demo page 1**](https://acheul.github.io/mdbook-collectors/posts/toc1.html)
+* [**Demo page 2**](https://acheul.github.io/mdbook-collectors/posts/toc2.html)
 
 
 ## The ToC block and wing
@@ -87,3 +92,7 @@ You can also use `additional-js` and `additional-css` for more customization. In
 ## See Also
 * [markdown-toc](https://crates.io/crates/markdown-toc)
 * [markdown-pagetoc](https://crates.io/crates/mdbook-pagetoc)
+
+## Dev log
+* Version `0.1.0` to `0.1.1`
+  * added `base_url` to configuration.

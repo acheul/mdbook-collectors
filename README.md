@@ -1,16 +1,17 @@
-# mdbook-collector
-[![Crates.io](https://img.shields.io/crates/v/mdbook-collector)](https://crates.io/crates/mdbook-collector)
+# mdbook custom crates
 
-Check out the `mdbook-collector` directory's [readme](https://github.com/acheul/mdbook-collectors/tree/main/mdbook-collector)
+[**Live demo page**](https://acheul.github.io/mdbook-collectors/tags.html)
 
-
-# mdbook-tagger
-[![Crates.io](https://img.shields.io/crates/v/mdbook-tagger)](https://crates.io/crates/mdbook-tagger)
-
-Check out the `mdbook-tagger` directory's [readme](https://github.com/acheul/mdbook-collectors/tree/main/mdbook-tagger)
+## mdbook-collector
+See the `/mdbook-collector` [readme](https://github.com/acheul/mdbook-collectors/tree/main/mdbook-collector)
 
 
-# mdbook-tocjs
-[![Crates.io](https://img.shields.io/crates/v/mdbook-tocjs)](https://crates.io/crates/mdbook-tocjs)
+## mdbook-tagger
+See the `/mdbook-tagger` [readme](https://github.com/acheul/mdbook-collectors/tree/main/mdbook-tagger)
 
-Check out the `mdbook-tocjs` directory's [readme](https://github.com/acheul/mdbook-collectors/tree/main/mdbook-tocjs)
+
+## mdbook-tocjs
+See the `/mdbook-tocjs` [readme](https://github.com/acheul/mdbook-collectors/tree/main/mdbook-tocjs)
+
+* [**Demo page 1**](https://acheul.github.io/mdbook-collectors/posts/toc1.html)
+* [**Demo page 2**](https://acheul.github.io/mdbook-collectors/posts/toc2.html)

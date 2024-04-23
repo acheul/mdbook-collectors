@@ -1,5 +1,7 @@
 # mdbook-tagger
 
+[![Crates.io](https://img.shields.io/crates/v/mdbook-tagger)](https://crates.io/crates/mdbook-tagger)
+
 A [mdbook preprocessor](https://rust-lang.github.io/mdBook/format/configuration/preprocessors.html) which collects and builds tag data in Json format.
 
 ## Install
