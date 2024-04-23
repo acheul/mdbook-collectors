@@ -14,13 +14,15 @@ pub struct Config {
   save_dir: PathBuf,
   block_marker_id: String,
   wing_marker_id: String,
-  theme_dir: PathBuf
+  theme_dir: PathBuf,
+  base_url: String,
 }
 
 static DEFAULT_SAVE_DIR: &str = "lib";
 static DEFAULT_BLOCK_MARKER_ID: &str = "tock";
 static DEFAULT_WING_MARKER_ID: &str = "tocw";
 static DEFAULT_THEME_DIR: &str = "theme";
+static DEFAULT_BASE_URL: &str = "/";
 
 
 fn get_value_to_str(cfg: &toml::map::Map<String, toml::value::Value>, key: &str) -> Option<Result<String>> {
@@ -44,7 +46,8 @@ impl Config {
       save_dir: ctx.config.book.src.join(DEFAULT_SAVE_DIR),
       block_marker_id: String::from(DEFAULT_BLOCK_MARKER_ID),
       wing_marker_id: String::from(DEFAULT_WING_MARKER_ID),
-      theme_dir: Path::new(DEFAULT_THEME_DIR).to_path_buf() // This one is not under /src
+      theme_dir: Path::new(DEFAULT_THEME_DIR).to_path_buf(), // This one is not under /src
+      base_url: String::from(DEFAULT_BASE_URL)
     };
 
     let Some(cfg) = ctx.config.get_preprocessor(preprocessor_name) else {
@@ -62,6 +65,9 @@ impl Config {
     }
     if let Some(x) = get_value_to_str(cfg, "theme_dir") {
       config.theme_dir = Path::new(x?.as_str()).to_path_buf(); // This one is not under /src
+    }
+    if let Some(x) = get_value_to_str(cfg, "base_url") {
+      config.base_url = x?;
     }
 
     if !config.save_dir.exists() {
@@ -117,8 +123,8 @@ impl Preprocessor for TocJsMaker {
 
     // make theme/head.hbs
     let head_hbs_literals = [
-      r#"<link rel="stylesheet" href="/lib/toc.css">"#,
-      r#"<script src="/lib/toc.js"></script>"#
+      format!(r#"<link rel="stylesheet" href="{}lib/toc.css">"#, cfg.base_url),
+      format!(r#"<script src="{}lib/toc.js"></script>"#, cfg.base_url)
     ];
       
     let head_hbs_path = cfg.theme_dir.join("head.hbs");
@@ -132,7 +138,7 @@ impl Preprocessor for TocJsMaker {
         f.read_to_string(&mut buf)?;
 
         for literal in head_hbs_literals {
-          if !buf.contains(literal) {
+          if !buf.contains(&literal) {
             f.write_all(literal.as_bytes())?;
           }
         }

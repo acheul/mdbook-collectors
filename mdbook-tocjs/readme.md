@@ -58,6 +58,7 @@ save_dir = "lib"
 theme_dir = "theme"
 block_marker_id = "tock"
 wing_marker_id = "tocw"
+base_url = "/"
 ```
 ### save_dir
 The directory where `toc.js` and `toc.css` file will be added to.
@@ -76,6 +77,9 @@ The created `head.hbs` would look like this:
 
 ### block_marker_id and wing_marker_id
 Literals to be used as nodes' ids in the raw markdown file. The preprocessor formats `toc.js` file to be matched with them.
+
+### base_url
+Sync base url. It's used in `head.hbs`.
 
 ## More Customization?
 You can also use `additional-js` and `additional-css` for more customization. In this case, manually clone and reivse the `toc.js` and `toc.css` file.
